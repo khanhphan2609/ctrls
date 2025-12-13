@@ -15,7 +15,7 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center text-white overflow-hidden"
+      className="relative min-h-screen flex items-center text-white pt-10 overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}

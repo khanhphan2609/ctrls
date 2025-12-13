@@ -1,0 +1,26 @@
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 80s linear infinite;
+}
+
+.marquee.reverse {
+  animation-direction: reverse;
+}
+
+.marquee.slow {
+  animation-duration: 80s;
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

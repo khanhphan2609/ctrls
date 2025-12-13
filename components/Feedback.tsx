@@ -1,20 +1,185 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+
 export default function Feedback() {
+  const categories = [
+    "Full show package",
+    "Production",
+    "Media - Entertainment",
+  ];
+
+  const feedbacks = [
+    {
+      category: "Full show package",
+      name: "Nguyen Minh Anh",
+      role: "Brand Manager",
+      company: "Luxury Brand",
+      avatar: "/feedback-1.png",
+      quote:
+        "CTRL-S delivered an exceptional experience. Every detail was crafted with precision and creativity.",
+    },
+    {
+      category: "Production",
+      name: "Tran Hoang Long",
+      role: "Marketing Director",
+      company: "Entertainment Group",
+      avatar: "/feedback-2.png",
+      quote:
+        "A professional team with a strong sense of aesthetics. The final result exceeded our expectations.",
+    },
+    {
+      category: "Media - Entertainment",
+      name: "Le Thu Trang",
+      role: "Founder",
+      company: "Creative Studio",
+      avatar: "/feedback-3.png",
+      quote:
+        "Working with CTRL-S was seamless. Their storytelling and execution were truly impressive.",
+    },
+  ];
+
+  const [activeTab, setActiveTab] = useState(categories[0]);
+  const [index, setIndex] = useState(0);
+
+  const filtered = feedbacks.filter(
+    (item) => item.category === activeTab
+  );
+
+  // 👉 Bảo vệ crash
+  if (filtered.length === 0) return null;
+
+  const prev = () =>
+    setIndex((i) => (i === 0 ? filtered.length - 1 : i - 1));
+  const next = () =>
+    setIndex((i) => (i === filtered.length - 1 ? 0 : i + 1));
+
   return (
-    <section className="h-screen flex items-center justify-center text-center px-6">
-      <div className="max-w-3xl">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6">
-          Creative. Proficient. Dedicated.
-        </h1>
-        <p className="text-gray-400 mb-8">
-          CTRL-S delivers memorable events, striking visuals, and compelling films.
-        </p>
-        <a
-          href="#services"
-          className="inline-block border px-8 py-3 rounded-full hover:bg-white hover:text-black transition"
+    <section
+      id="feedback"
+      className="relative min-h-screen flex items-center text-white overflow-hidden"
+    >
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+
+        {/* TITLE */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-serif tracking-wider">
+            FEEDBACK
+          </h2>
+          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient">
+            WHAT OUR CLIENTS SAY
+          </h3>
+        </div>
+
+        {/* CATEGORY TABS */}
+        <div className="flex justify-center mb-20 overflow-x-auto">
+          <div
+            className="
+              flex rounded-full overflow-hidden min-w-max
+              bg-gradient-to-r
+              from-[#7a5a23]
+              via-[#d9c6a3]
+              to-[#7a5a23]
+              shadow-lg
+            "
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => {setActiveTab(cat); setIndex(0);}}
+                className={`
+                  px-8 py-3 text-sm md:text-base uppercase tracking-wider
+                  whitespace-nowrap
+                  transition-all duration-300
+                  ${
+                    activeTab === cat
+                      ? "bg-black/30 text-white"
+                      : "text-white/80 hover:bg-black/20"
+                  }
+                `}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* DESKTOP */}
+        <div
+          className={`hidden md:grid gap-12 mb-20 ${
+            filtered.length === 1
+              ? "grid-cols-1 place-items-center"
+              : filtered.length === 2
+              ? "grid-cols-2 place-items-center"
+              : "grid-cols-3"
+          }`}
         >
-          Our Services
-        </a>
+          {filtered.map((item, i) => (
+            <FeedbackCard key={i} {...item} />
+          ))}
+        </div>
+
+        {/* MOBILE SLIDER */}
+        <div className="md:hidden flex items-center justify-center gap-6 mb-20">
+          <button
+            onClick={prev}
+            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+          >
+            <HiChevronLeft className="text-2xl" />
+          </button>
+
+          <FeedbackCard {...filtered[index]} />
+
+          <button
+            onClick={next}
+            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+          >
+            <HiChevronRight className="text-2xl" />
+          </button>
+        </div>
+
       </div>
     </section>
+  );
+}
+
+/* ---------- Feedback Card ---------- */
+function FeedbackCard({
+  name,
+  role,
+  company,
+  avatar,
+  quote,
+}: {
+  name: string;
+  role: string;
+  company: string;
+  avatar: string;
+  quote: string;
+}) {
+  return (
+    <div className="flex flex-col items-center text-center max-w-sm mx-auto">
+
+      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7a5a23] shadow-lg mb-8">
+        <Image
+          src={avatar}
+          alt={name}
+          width={128}
+          height={128}
+          className="object-cover w-full h-full"
+        />
+      </div>
+
+      <p className="text-lg italic leading-relaxed mb-8">
+        “{quote}”
+      </p>
+
+      <h4 className="text-xl tracking-wide">{name}</h4>
+      <p className="text-sm uppercase tracking-wider opacity-80">
+        {role} · {company}
+      </p>
+    </div>
   );
 }
