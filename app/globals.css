@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.container-bg {
+  background-image: url("/bg.png");
+  background-position: top center;
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+}
