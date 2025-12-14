@@ -23,19 +23,19 @@ export default function OurClients() {
 
         {/* TITLE */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider">
+          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
             OUR CLIENTS
           </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient">
+          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
             BRANDS WE WORK WITH
           </h3>
         </div>
 
         {/* ROW 1 */}
-        <div className="relative overflow-hidden mb-20">
+        <div className="relative overflow-hidden mb-20 ">
           <div ref={row1} className="marquee slow">
             {[...logos1, ...logos1].map((logo, i) => (
-              <Logo key={i} src={logo} />
+              <Logo key={i} src={logo} className="text-shadow" />
             ))}
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function OurClients() {
         <div className="relative overflow-hidden">
           <div ref={row2} className="marquee slow reverse">
             {[...logos2, ...logos2].map((logo, i) => (
-              <Logo key={i} src={logo} />
+              <Logo key={i} src={logo} className="text-shadow"/>
             ))}
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function OurClients() {
 }
 
 /* ---------- Logo ---------- */
-function Logo({ src }: { src: string }) {
+function Logo({ src, className }: { src: string; className?: string }) {
   return (
     <div className="flex items-center justify-center min-w-[160px] px-8">
       <Image
@@ -63,7 +63,7 @@ function Logo({ src }: { src: string }) {
         alt="Client logo"
         width={160}
         height={80}
-        className="object-contain transition"
+        className={`object-contain transition ${className || ""}`}
       />
     </div>
   );

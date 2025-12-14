@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import "./AboutUs.css";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export default function AboutUs() {
-  const images = ["/about-1.png", "/about-2.png", "/about-3.png"];
+  const images = ["/about/about-1.png", "/about/about-2.png", "/about/about-3.png"];
   const [index, setIndex] = useState(0);
 
   const prev = () => setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
@@ -15,12 +14,12 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center text-white pt-10 overflow-hidden"
+      className="relative min-h-screen flex items-center text-white overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider">
+          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
             CTRL-S
           </h2>
           <h3
@@ -60,8 +59,8 @@ export default function AboutUs() {
 
         {/* DESCRIPTION */}
         <div className="max-w-4xl mx-auto text-center leading-relaxed mb-20">
-          <h3 className="text-3xl font-serif mb-6">CTRL-S</h3>
-          <p className="text-xl font-serif mb-6">
+          <h3 className="text-3xl font-serif mb-6 text-shadow">CTRL-S</h3>
+          <p className="text-xl font-serif mb-6 text-shadow">
             CTRL-S is dedicated to delivering{" "}
             <strong>paramount services</strong> to our clients through{" "}
             <strong>
@@ -73,7 +72,7 @@ export default function AboutUs() {
         </div>
 
         {/* VALUES */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-lg tracking-wide">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-lg tracking-wide text-shadow">
           {["Creative", "Appreciative", "Proficient", "Dedicated"].map(
             (item) => (
               <div key={item} className="uppercase text-2xl font-semibold">

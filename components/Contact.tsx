@@ -9,14 +9,14 @@ export default function Contact() {
           className="font-serif
   text-gold-gradient
             text-5xl md:text-6xl tracking-wider mb-20
-            text-center
+            text-center text-shadow-lg
           "
         >
           CONTACT INFORMATION
         </h2>
 
         {/* CONTENT */}
-        <div className="grid md:grid-cols-2 gap-20">
+        <div className="grid md:grid-cols-2 gap-20 text-shadow ">
           {/* LEFT */}
           <div className="space-y-16 text-center md:text-left">
             {/* CONTACT */}
@@ -86,7 +86,7 @@ export default function Contact() {
                 alt="QR Code"
                 width={160}
                 height={160}
-                className="border border-white/30"
+                className="border border-[var(--primary)]/90 "
               />
             </div>
           </div>

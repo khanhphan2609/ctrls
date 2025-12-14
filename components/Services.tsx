@@ -9,17 +9,17 @@ export default function Services() {
     {
       title: "Full Show Package",
       desc: "End-to-end event solutions, delivering seamless experiences that amplify brand impact.",
-      image: "/service-1.png",
+      image: "/services/service-1.png",
     },
     {
       title: "Production",
       desc: "High-quality production with bold visuals that shape brand identity and engagement.",
-      image: "/service-2.png",
+      image: "/services/service-2.png",
     },
     {
       title: "Media - Entertainment",
       desc: "Story-driven media content crafted to inspire, entertain, and connect with audiences.",
-      image: "/service-3.png",
+      image: "/services/service-3.png",
     },
   ];
 
@@ -36,10 +36,10 @@ export default function Services() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider">
+          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
             SERVICES
           </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient">
+          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
             WHAT WE DELIVER
           </h3>
         </div>
@@ -52,21 +52,21 @@ export default function Services() {
         </div>
 
         {/* MOBILE SLIDER */}
-        <div className="md:hidden flex items-center justify-center gap-6 mb-20">
+        <div className="md:hidden flex items-center justify-center gap-6 mb-20 text-shadow">
           <button
             onClick={prev}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+            className="p-2 rounded-full border border-[var(--primary)]/60 transition"
           >
-            <HiChevronLeft className="text-2xl" />
+            <HiChevronLeft className="text-2xl text-[var(--primary)]" />
           </button>
 
           <ServiceCard {...services[index]} />
 
           <button
             onClick={next}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+            className="p-2 rounded-full border border-[var(--primary)]/60 transition"
           >
-            <HiChevronRight className="text-2xl" />
+            <HiChevronRight className="text-2xl text-[var(--primary)]" />
           </button>
         </div>
       </div>
@@ -85,9 +85,9 @@ function ServiceCard({
   image: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center max-w-sm mx-auto">
+    <div className="flex flex-col items-center text-center max-w-sm mx-auto text-shadow">
       {/* IMAGE */}
-      <div className="w-64 h-64 rounded-full overflow-hidden border-2 border-[#7a5a23] shadow-lg mb-8">
+      <div className="w-64 h-64 rounded-full overflow-hidden border-2 border-[var(--primary)] shadow-lg mb-8">
         <Image
           src={image}
           alt={title}

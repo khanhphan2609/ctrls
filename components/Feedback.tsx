@@ -14,30 +14,30 @@ export default function Feedback() {
   const feedbacks = [
     {
       category: "Full show package",
-      name: "Nguyen Minh Anh",
-      role: "Brand Manager",
-      company: "Luxury Brand",
-      avatar: "/feedback-1.png",
+      name: "ThS Chung Quốc Phong",
+      role: "Trưởng phòng Tuyển sinh",
+      company: "HUFLIT",
+      avatar: "/feedback/feedback-1.png",
       quote:
-        "CTRL-S delivered an exceptional experience. Every detail was crafted with precision and creativity.",
+        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
     },
     {
       category: "Production",
-      name: "Tran Hoang Long",
-      role: "Marketing Director",
-      company: "Entertainment Group",
-      avatar: "/feedback-2.png",
+      name: "ThS Chung Quốc Phong",
+      role: "Trưởng phòng Tuyển sinh",
+      company: "HUFLIT",
+      avatar: "/feedback/feedback-1.png",
       quote:
-        "A professional team with a strong sense of aesthetics. The final result exceeded our expectations.",
+        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
     },
     {
       category: "Media - Entertainment",
-      name: "Le Thu Trang",
-      role: "Founder",
-      company: "Creative Studio",
-      avatar: "/feedback-3.png",
+      name: "ThS Chung Quốc Phong",
+      role: "Trưởng phòng Tuyển sinh",
+      company: "HUFLIT",
+      avatar: "/feedback/feedback-1.png",
       quote:
-        "Working with CTRL-S was seamless. Their storytelling and execution were truly impressive.",
+        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
     },
   ];
 
@@ -65,10 +65,10 @@ export default function Feedback() {
 
         {/* TITLE */}
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider">
+          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
             FEEDBACK
           </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient">
+          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient ">
             WHAT OUR CLIENTS SAY
           </h3>
         </div>
@@ -79,9 +79,9 @@ export default function Feedback() {
             className="
               flex rounded-full overflow-hidden min-w-max
               bg-gradient-to-r
-              from-[#7a5a23]
-              via-[#d9c6a3]
-              to-[#7a5a23]
+              from-[var(--primary)]
+              via-[var(--black)]
+              to-[var(--primary)]
               shadow-lg
             "
           >
@@ -92,7 +92,7 @@ export default function Feedback() {
                 className={`
                   px-8 py-3 text-sm md:text-base uppercase tracking-wider
                   whitespace-nowrap
-                  transition-all duration-300
+                  transition-all duration-300 
                   ${
                     activeTab === cat
                       ? "bg-black/30 text-white"
@@ -125,7 +125,7 @@ export default function Feedback() {
         <div className="md:hidden flex items-center justify-center gap-6 mb-20">
           <button
             onClick={prev}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+            className="p-2 rounded-full border border-white/60 transition"
           >
             <HiChevronLeft className="text-2xl" />
           </button>
@@ -134,7 +134,7 @@ export default function Feedback() {
 
           <button
             onClick={next}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
+            className="p-2 rounded-full border border-white/60 transition"
           >
             <HiChevronRight className="text-2xl" />
           </button>
@@ -172,12 +172,12 @@ function FeedbackCard({
         />
       </div>
 
-      <p className="text-lg italic leading-relaxed mb-8">
+      <p className="text-lg italic leading-relaxed mb-8 text-shadow">
         “{quote}”
       </p>
 
-      <h4 className="text-xl tracking-wide">{name}</h4>
-      <p className="text-sm uppercase tracking-wider opacity-80">
+      <h4 className="text-xl tracking-wide text-shadow">{name}</h4>
+      <p className="text-sm uppercase tracking-wider opacity-80 text-shadow">
         {role} · {company}
       </p>
     </div>

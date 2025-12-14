@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #b77f0f;
+  --white: #ecebdc;
+  --black: #5d4109;
+  --font-geist-sans: "Geist Sans", -apple-system, BlinkMachine, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-geist-mono: "Geist Mono", SFMono-Regular, Consolas, "Liberation Mono",
+    Menlo, Courier, monospace;
 }
 
 @theme inline {
@@ -30,4 +37,23 @@ body {
   background-position: top center;
   background-repeat: repeat-y;
   background-size: 100% auto;
+}
+
+/* Gradient gold text */
+.text-gold-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--white),
+    var(--primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Text shadow for readability */
+.text-shadow {
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.7),
+    0 0 12px rgba(0, 0, 0, 0.5);
 }

@@ -8,7 +8,7 @@ import ContactFixed from "@/components/ContactFixed";
 
 export default function Home() {
   return (
-    <div className="container-bg bg-black text-white min-h-screen">
+    <div className="container-bg pt-10">
       <Header />
       <AboutUs />
       <Services />
