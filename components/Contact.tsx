@@ -9,7 +9,7 @@ export default function Contact() {
           className="font-serif
   text-gold-gradient
             text-5xl md:text-6xl tracking-wider mb-20
-            text-center text-shadow-lg
+            text-center text-shadow
           "
         >
           CONTACT INFORMATION
@@ -26,14 +26,14 @@ export default function Contact() {
               {/* PHONE */}
               <div className="mb-8">
                 <p className="uppercase tracking-widest mb-2">Phone</p>
-                <p className="text-xl">0939 735 071</p>
+                <a href="tel:0939735071" className="text-xl hover:text-[var(--primary)]">0939 735 071</a>
               </div>
 
               {/* EMAIL */}
               <div className="mb-8">
                 <p className="uppercase tracking-widest mb-2">Email</p>
-                <p className="text-xl">ctrlscompany@gmail.com</p>
-                <p className="text-xl">truongbao.ctrls@gmail.com</p>
+                <a href="mailto:ctrlscompany@gmail.com" className="text-xl hover:text-[var(--primary)]">ctrlscompany@gmail.com</a><br />
+                <a href="mailto:truongbao.ctrls@gmail.com" className="text-xl hover:text-[var(--primary)]">truongbao.ctrls@gmail.com</a>
               </div>
             </div>
 
@@ -46,7 +46,7 @@ export default function Contact() {
                 <a
                   href="https://www.facebook.com/ctrlscoltd"
                   target="_blank"
-                  className="underline hover:text-[#d9c6a3]"
+                  className="underline hover:text-[var(--primary)]"
                 >
                   https://www.facebook.com/ctrlscoltd
                 </a>
@@ -57,7 +57,7 @@ export default function Contact() {
                 <a
                   href="https://www.tiktok.com/@ctrlscoltd"
                   target="_blank"
-                  className="underline hover:text-[#d9c6a3]"
+                  className="underline hover:text-[var(--primary)]"
                 >
                   https://www.tiktok.com/@ctrlscoltd
                 </a>

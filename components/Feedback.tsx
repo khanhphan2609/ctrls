@@ -68,7 +68,7 @@ export default function Feedback() {
           <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
             FEEDBACK
           </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient ">
+          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
             WHAT OUR CLIENTS SAY
           </h3>
         </div>
