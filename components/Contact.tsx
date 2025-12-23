@@ -82,7 +82,7 @@ export default function Contact() {
             {/* QR */}
             <div>
               <Image
-                src="/qr.png"
+                src="/imgs/qr.png"
                 alt="QR Code"
                 width={160}
                 height={160}

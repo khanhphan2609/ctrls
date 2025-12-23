@@ -1,15 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export default function AboutUs() {
-  const images = ["/about/about-1.png", "/about/about-2.png", "/about/about-3.png"];
-  const [index, setIndex] = useState(0);
-
-  const prev = () => setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
-  const next = () => setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+  const images = ["/imgs/about/about-1.png", "/imgs/about/about-2.png", "/imgs/about/about-3.png", "/imgs/about/about-4.png", "/imgs/about/about-5.png"];
 
   return (
     <section
@@ -18,64 +12,65 @@ export default function AboutUs() {
     >
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
+        <div className="text-center mb-16 font-bold">
+          <h2 className="text-5xl md:text-6xl lg:text-8xl tracking-wider text-shadow">
             CTRL-S
           </h2>
           <h3
-            className="mt-4 text-3xl md:text-4xl font-serif tracking-wider
+            className="mt-4 text-3xl md:text-4xl lg:text-6xl tracking-wider
   text-gold-gradient"
           >
-            THE RESERVE FOR YOUR CORE EQUITY
+            SAVING THE TRUE VALUE OF YOURS
           </h3>
         </div>
 
         {/* IMAGES */}
-        {/* Desktop */}
-        <div className="hidden md:flex justify-center items-center gap-10 mb-20">
-          {images.map((img, i) => (
-            <ImageCircle key={i} src={img} />
-          ))}
-        </div>
+        <div className="mb-20">
+          {/* Desktop: 5 items, wrap if needed */}
+          <div className="hidden lg:flex flex-wrap justify-center items-center gap-6">
+            {images.map((img, i) => (
+              <ImageCircle key={i} src={img} />
+            ))}
+          </div>
 
-        {/* Mobile slider */}
-        <div className="md:hidden flex items-center justify-center gap-6 mb-20">
-          <button
-            onClick={prev}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
-          >
-            <HiChevronLeft className="text-2xl" />
-          </button>
+          {/* Tablet: 3-2 layout */}
+          <div className="hidden md:flex lg:hidden grid grid-cols-3 gap-6 justify-items-center">
+            {images.map((img, i) => (
+              <ImageCircle key={i} src={img} />
+            ))}
+          </div>
 
-          <ImageCircle src={images[index]} />
-
-          <button
-            onClick={next}
-            className="p-2 rounded-full border border-white/40 hover:bg-white/10 transition"
-          >
-            <HiChevronRight className="text-2xl" />
-          </button>
+          {/* Mobile: 2-2-1 layout */}
+          <div className="md:hidden grid grid-cols-2 gap-4 px-4 justify-items-center">
+            {images.map((img, i) => (
+              <div key={i} className={i === 4 ? 'col-span-2 flex justify-center' : ''}>
+                <ImageCircle src={img} />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* DESCRIPTION */}
         <div className="max-w-4xl mx-auto text-center leading-relaxed mb-20">
-          <h3 className="text-3xl font-serif mb-6 text-shadow">CTRL-S</h3>
-          <p className="text-xl font-serif mb-6 text-shadow">
-            CTRL-S is dedicated to delivering{" "}
-            <strong>paramount services</strong> to our clients through{" "}
-            <strong>
-              memorable events, striking visuals, and compelling films
-            </strong>
+          <h3 className="text-3xl md:text-4xl lg:text-5xl mb-6 font-bold">
+            CTRL-S
+          </h3>
+          <p className="text-lg md:text-xl lg:text-2xl mb-6 leading-relaxed">
+            CTRL-S is dedicated to delivering <span className="text-gold-gradient font-bold">paramount services</span> to our clients through{" "}
+            <span className="text-gold-gradient font-bold">memorable events</span>, <span className="text-gold-gradient font-bold">striking visuals</span>, and <span className="text-gold-gradient font-bold">compelling films</span>
             . We operate under the core philosophy of being{" "}
-            <em>“The Reserve for Your Core Equity”.</em>
+            <span className="text-gold-gradient font-bold italic">“Saving the true value of yours”</span>.
           </p>
         </div>
 
         {/* VALUES */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-lg tracking-wide text-shadow">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
           {["Creative", "Appreciative", "Proficient", "Dedicated"].map(
             (item) => (
-              <div key={item} className="uppercase text-2xl font-semibold">
+              <div
+                key={item}
+                className="uppercase text-xl md:text-2xl lg:text-3xl font-bold text-gold-gradient border-2 border-[#d6b26f] rounded-lg p-4 bg-black/20 backdrop-blur-sm"
+              >
                 {item}
               </div>
             )
@@ -89,7 +84,7 @@ export default function AboutUs() {
 /* ---------- Image Circle ---------- */
 function ImageCircle({ src }: { src: string }) {
   return (
-    <div className="w-56 h-56 rounded-full overflow-hidden border-2 border-[#7a5a23] shadow-lg">
+    <div className="w-32 h-32 lg:w-56 lg:h-56 rounded-full overflow-hidden border-2 border-[#7a5a23] shadow-lg">
       <Image
         src={src}
         alt="CTRL-S activity"

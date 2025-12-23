@@ -2,19 +2,35 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { FaHome } from "react-icons/fa";
-import { HiMenu, HiX } from "react-icons/hi";
+import {
+  FaHome,
+  FaPhoneAlt,
+  FaServicestack,
+  FaUsers,
+  FaCommentDots,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const NAV_ITEMS = [
-  { id: "about", label: "About Us", icon: <FaHome /> },
-  { id: "services", label: "Services" },
-  { id: "clients", label: "Our Clients" },
-  { id: "feedback", label: "Feedback" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "About", icon: <FaHome /> },
+  { id: "services", label: "Services", icon: <FaServicestack /> },
+  { id: "clients", label: "Clients", icon: <FaUsers /> },
+  { id: "feedback", label: "Feedback", icon: <FaCommentDots /> },
+  { id: "contact", label: "Contact", icon: <FaEnvelope /> },
 ];
 
+const MOBILE_NAV_ITEMS = [
+  { id: "about", label: "About", icon: <FaHome /> },
+  { id: "services", label: "Services", icon: <FaServicestack /> },
+  { id: "clients", label: "Clients", icon: <FaUsers /> },
+  { id: "feedback", label: "Feedback", icon: <FaCommentDots /> },
+  { id: "contact", label: "Contact", icon: <FaEnvelope /> },
+];
+
+const GRADIENT =
+  "bg-[linear-gradient(180deg,#d6b26f_0%,#b37c11_50%,#d6b26f_100%)]";
+
 export default function Header() {
-  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("about");
 
   const navRef = useRef<HTMLDivElement>(null);
@@ -23,23 +39,10 @@ export default function Header() {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  /* Auto close mobile menu when resize */
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1280) setOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  /* Scroll spy */
+  /* ================= SCROLL SPY ================= */
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY + 120;
@@ -60,7 +63,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Move underline */
+  /* ================= DESKTOP UNDERLINE ================= */
   useEffect(() => {
     if (!navRef.current || !indicatorRef.current) return;
 
@@ -76,30 +79,68 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 w-full z-50">
-      <div className="backdrop-blur bg-black/20 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-12 items-center">
+      {/* ================= HEADER BAR ================= */}
+      <div className="backdrop-blur bg-black/30 border-b border-white/60 xl:hidden">
+        <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-2 items-center">
           {/* LOGO */}
-          <div className="col-span-6 xl:col-span-1 flex items-center">
+          <div className="flex items-center">
             <a href="#about">
-              <Image src="/icon.png" alt="CTRL-S" width={96} height={38} />
+              <Image
+                src="/logo-slogan.png"
+                alt="Logo"
+                width={80}
+                height={32}
+              />
+            </a>
+          </div>
+
+          {/* HOTLINE */}
+          <div className="flex justify-end">
+            <a href="tel:0939735071" className="flex items-center gap-2">
+              <span
+                className={`
+                  w-9 h-9 rounded-full
+                  flex items-center justify-center
+                  bg-transparent border-2 border-[#d6b26f]
+                  text-[#d6b26f]
+                `}
+              >
+                <FaPhoneAlt className="text-sm" />
+              </span>
+              <span className="text-sm text-white tracking-wide font-bold">
+                0939 735 071
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= DESKTOP HEADER BAR ================= */}
+      <div className="hidden xl:block backdrop-blur bg-black/30 border-b border-white/60">
+        <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-12 items-center">
+          {/* LOGO */}
+          <div className="col-span-2 flex items-center">
+            <a href="#about">
+              <Image
+                src="/logo-slogan.png"
+                alt="Logo"
+                width={100}
+                height={40}
+              />
             </a>
           </div>
 
           {/* DESKTOP MENU */}
-          <div className="hidden xl:flex col-span-10 justify-center">
+          <div className="col-span-8 flex justify-center">
             <nav
               ref={navRef}
-              className="
+              className={`
                 relative flex items-center gap-10
-                px-14 py-4 text-lg uppercase rounded-full
-                bg-gradient-to-r
-                from-[var(--primary)]
-                via-[var(--white)]
-                to-[var(--primary)]
-                text-[var(--black)]
-                font-bold
-                shadow-[0_10px_40px_rgba(0,0,0,0.8)]
-              "
+                px-14 py-4 rounded-full
+                text-sm uppercase font-bold text-white
+                ${GRADIENT}
+                shadow-[0_10px_40px_rgba(0,0,0,0.6)]
+              `}
             >
               {NAV_ITEMS.map((item) => (
                 <a
@@ -111,82 +152,83 @@ export default function Header() {
                     setActive(item.id);
                     scrollToSection(item.id);
                   }}
-                  className={`
-                    relative z-10 flex items-center gap-3
-                    transition-all duration-300 ease-out
-                    ${active === item.id ? "opacity-100" : "opacity-70"}
-                  `}
+                  className={`flex items-center gap-2 transition ${
+                    active === item.id ? "opacity-100" : "opacity-70"
+                  }`}
                 >
-                  {item.icon && <span>{item.icon}</span>}
+                  {item.icon}
                   {item.label}
                 </a>
               ))}
 
-              {/* SLIDING UNDERLINE */}
+              {/* underline cùng màu text */}
               <span
                 ref={indicatorRef}
                 className="
                   absolute bottom-2 left-0
                   h-[2px] rounded-full
-                  bg-[var(--black)]
-                  transition-all duration-300 ease-out
+                  bg-white
+                  transition-all duration-300
                 "
               />
             </nav>
           </div>
 
-          {/* MOBILE BUTTON */}
-          <div className="col-span-6 xl:hidden flex justify-end">
-            <button onClick={() => setOpen(!open)} className="text-white">
-              {open ? (
-                <HiX className="text-3xl" />
-              ) : (
-                <HiMenu className="text-3xl" />
-              )}
-            </button>
+          {/* HOTLINE */}
+          <div className="col-span-2 flex justify-end">
+            <a href="tel:0939735071" className="flex items-center gap-2">
+              <span
+                className={`
+                  w-9 h-9 rounded-full
+                  flex items-center justify-center
+                  bg-transparent border-2 border-[#d6b26f]
+                  text-[#d6b26f]
+                `}
+              >
+                <FaPhoneAlt className="text-xs" />
+              </span>
+              <span className="hidden sm:block text-sm text-white font-bold tracking-wide">
+                0939 735 071
+              </span>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* MOBILE MENU */}
-      {open && (
-        <div className="xl:hidden fixed inset-0 bg-black/90 backdrop-blur animate-fadeIn z-40">
-          {/* CLOSE BUTTON */}
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Close menu"
-            className="
-        absolute top-6 right-6
-        text-white
-        hover:opacity-80
-        transition
-      "
-          >
-            <HiX className="text-4xl" />
-          </button>
-
-          {/* MENU ITEMS */}
-          <div className="flex flex-col items-center justify-center h-full gap-8 text-xl uppercase text-white">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActive(item.id);
-                  setOpen(false);
-                  scrollToSection(item.id);
-                }}
-                className={`transition ${
-                  active === item.id ? "opacity-100" : "opacity-60"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* ================= MOBILE/TABLET BOTTOM MENU ================= */}
+      <div className="xl:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-4">
+        <nav
+          className={`
+            grid grid-cols-5 gap-1
+            px-3 py-2 rounded-full
+            text-white
+            ${GRADIENT}
+            shadow-xl
+          `}
+        >
+          {MOBILE_NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => {
+                setActive(item.id);
+                scrollToSection(item.id);
+              }}
+              className={`
+                flex flex-col items-center gap-1
+                transition
+                ${
+                  active === item.id
+                    ? "opacity-100 bg-white/20"
+                    : "opacity-70"
+                }
+              `}
+            >
+              <span className="text-base">{item.icon}</span>
+              <span className="text-[8px] md:text-[10px] uppercase">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }

@@ -1,48 +1,35 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export default function Services() {
   const services = [
     {
       title: "Full Show Package",
-      desc: "End-to-end event solutions, delivering seamless experiences that amplify brand impact.",
       image: "/services/service-1.png",
     },
     {
       title: "Production",
-      desc: "High-quality production with bold visuals that shape brand identity and engagement.",
       image: "/services/service-2.png",
     },
     {
       title: "Media - Entertainment",
-      desc: "Story-driven media content crafted to inspire, entertain, and connect with audiences.",
       image: "/services/service-3.png",
     },
   ];
 
-  const [index, setIndex] = useState(0);
-
-  const prev = () => setIndex((i) => (i === 0 ? services.length - 1 : i - 1));
-  const next = () => setIndex((i) => (i === services.length - 1 ? 0 : i + 1));
-
   return (
     <section
       id="services"
-      className="relative min-h-screen flex items-center text-white overflow-hidden"
+      className="min-h-screen flex items-center overflow-hidden"
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+      <div className="z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
-            SERVICES
-          </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
-            WHAT WE DELIVER
-          </h3>
-        </div>
+        <h2 className="text-center mb-24 text-4xl md:text-6xl font-bold tracking-wider">
+          <span className="bg-gradient-to-r text-gold-gradient bg-clip-text text-transparent">
+            OUR SERVICES
+          </span>
+        </h2>
 
         {/* DESKTOP */}
         <div className="hidden md:grid grid-cols-3 gap-12 mb-20">
@@ -51,23 +38,11 @@ export default function Services() {
           ))}
         </div>
 
-        {/* MOBILE SLIDER */}
-        <div className="md:hidden flex items-center justify-center gap-6 mb-20 text-shadow">
-          <button
-            onClick={prev}
-            className="p-2 rounded-full border border-[var(--primary)]/60 transition"
-          >
-            <HiChevronLeft className="text-2xl text-[var(--primary)]" />
-          </button>
-
-          <ServiceCard {...services[index]} />
-
-          <button
-            onClick={next}
-            className="p-2 rounded-full border border-[var(--primary)]/60 transition"
-          >
-            <HiChevronRight className="text-2xl text-[var(--primary)]" />
-          </button>
+        {/* MOBILE */}
+        <div className="md:hidden grid grid-cols-1 gap-8 mb-20">
+          {services.map((service, i) => (
+            <ServiceCard key={i} {...service} />
+          ))}
         </div>
       </div>
     </section>
@@ -75,19 +50,15 @@ export default function Services() {
 }
 
 /* ---------- Service Card ---------- */
-function ServiceCard({
-  title,
-  desc,
-  image,
-}: {
-  title: string;
-  desc: string;
-  image: string;
-}) {
+function ServiceCard({ title, image }: { title: string; image: string }) {
   return (
-    <div className="flex flex-col items-center text-center max-w-sm mx-auto text-shadow">
+    <div className="flex flex-col items-center text-center max-w-sm mx-auto">
+      {/* TEXT */}
+      <h2 className="text-xl md:text-2xl lg:text-3xl mb-4 tracking-wide font-bold text-white">
+        {title}
+      </h2>
       {/* IMAGE */}
-      <div className="w-64 h-64 rounded-full overflow-hidden border-2 border-[var(--primary)] shadow-lg mb-8">
+      <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#d6b26f] shadow-lg mb-8">
         <Image
           src={image}
           alt={title}
@@ -96,10 +67,6 @@ function ServiceCard({
           className="object-cover w-full h-full"
         />
       </div>
-
-      {/* TEXT */}
-      <h4 className="text-2xl font-serif mb-4 tracking-wide">{title}</h4>
-      <p className="text-lg font-serif opacity-90">{desc}</p>
     </div>
   );
 }
