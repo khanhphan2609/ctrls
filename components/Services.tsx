@@ -6,15 +6,15 @@ export default function Services() {
   const services = [
     {
       title: "Full Show Package",
-      image: "/services/service-1.png",
+      image: "/imgs/services/service-1.png",
     },
     {
       title: "Production",
-      image: "/services/service-2.png",
+      image: "/imgs/services/service-2.png",
     },
     {
       title: "Media - Entertainment",
-      image: "/services/service-3.png",
+      image: "/imgs/services/service-3.png",
     },
   ];
 

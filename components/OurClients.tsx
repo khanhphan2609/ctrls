@@ -1,70 +1,61 @@
-"use client";
-
-import { useRef } from "react";
 import Image from "next/image";
-import "./OurClients.css";
+
+const logos = Array.from(
+  { length: 33 },
+  (_, i) => `/imgs/logo_clients/${i+1}.png`
+);
 
 export default function OurClients() {
-  const row1 = useRef<HTMLDivElement>(null);
-  const row2 = useRef<HTMLDivElement>(null);
-
-  const logos = Array.from(
-    { length: 32 },
-    (_, i) => `/clients/client-${i + 1}.png`
-  );
-
-  const half = Math.ceil(logos.length / 2);
-  const logos1 = logos.slice(0, half);
-  const logos2 = logos.slice(half);
-
   return (
-    <section id="clients" className="relative py-32 text-white overflow-hidden">
+    <section id="clients" className="py-32 text-white">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* TITLE */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
-            OUR CLIENTS
-          </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
-            BRANDS WE WORK WITH
-          </h3>
-        </div>
+        <h2 className="text-center mb-20 text-4xl md:text-6xl font-bold tracking-wider">
+          <span className="text-gold-gradient">OUR CLIENT</span>
+        </h2>
 
-        {/* ROW 1 */}
-        <div className="relative overflow-hidden mb-20 ">
-          <div ref={row1} className="marquee slow">
-            {[...logos1, ...logos1].map((logo, i) => (
-              <Logo key={i} src={logo} className="text-shadow" />
-            ))}
-          </div>
+        {/* LOGO GRID */}
+        <div
+          className="
+            grid
+            grid-cols-3
+            sm:grid-cols-4
+            md:grid-cols-5
+            lg:grid-cols-6
+            xl:grid-cols-7
+            gap-x-10
+            gap-y-14
+            items-center
+            justify-items-center
+          "
+        >
+          {logos.map((src, idx) => (
+            <div
+              key={idx}
+              className="
+                relative
+                w-28
+                h-20
+                flex
+                items-center
+                justify-center
+                opacity-90
+                hover:opacity-100
+                transition
+                duration-300
+                hover:grayscale-0
+              "
+            >
+              <Image
+                src={src}
+                alt={`Client logo ${idx + 1}`}
+                fill
+                className="object-contain"
+              />
+            </div>
+          ))}
         </div>
-
-        {/* ROW 2 (reverse) */}
-        <div className="relative overflow-hidden">
-          <div ref={row2} className="marquee slow reverse">
-            {[...logos2, ...logos2].map((logo, i) => (
-              <Logo key={i} src={logo} className="text-shadow"/>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
-  );
-}
-
-/* ---------- Logo ---------- */
-function Logo({ src, className }: { src: string; className?: string }) {
-  return (
-    <div className="flex items-center justify-center min-w-[160px] px-8">
-      <Image
-        src={src}
-        alt="Client logo"
-        width={160}
-        height={80}
-        className={`object-contain transition ${className || ""}`}
-      />
-    </div>
   );
 }

@@ -1,95 +1,164 @@
 import Image from "next/image";
+import {
+  FaFacebookF,
+  FaYoutube,
+  FaTiktok,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative py-32 text-white overflow-hidden">
+    <section id="contact" className="py-32 text-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* TITLE */}
-        <h2
-          className="font-serif
-  text-gold-gradient
-            text-5xl md:text-6xl tracking-wider mb-20
-            text-center text-shadow
-          "
-        >
-          CONTACT INFORMATION
+        <h2 className="text-center mb-24 text-4xl md:text-6xl font-bold tracking-wider">
+          <span className="text-gold-gradient bg-clip-text text-transparent">
+            CONTACT INFORMATION
+          </span>
         </h2>
 
-        {/* CONTENT */}
-        <div className="grid md:grid-cols-2 gap-20 text-shadow ">
-          {/* LEFT */}
-          <div className="space-y-16 text-center md:text-left">
-            {/* CONTACT */}
-            <div>
-              <h3 className="text-3xl tracking-wider mb-10">CONTACT</h3>
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16">
+          {/* COMPANY */}
+          <div className="space-y-6">
+            <Image
+              src="/logo-slogan.png"
+              alt="CTRL-S"
+              width={120}
+              height={60}
+              className="object-contain"
+            />
 
-              {/* PHONE */}
-              <div className="mb-8">
-                <p className="uppercase tracking-widest mb-2">Phone</p>
-                <a href="tel:0939735071" className="text-xl hover:text-[var(--primary)]">0939 735 071</a>
-              </div>
-
-              {/* EMAIL */}
-              <div className="mb-8">
-                <p className="uppercase tracking-widest mb-2">Email</p>
-                <a href="mailto:ctrlscompany@gmail.com" className="text-xl hover:text-[var(--primary)]">ctrlscompany@gmail.com</a><br />
-                <a href="mailto:truongbao.ctrls@gmail.com" className="text-xl hover:text-[var(--primary)]">truongbao.ctrls@gmail.com</a>
-              </div>
+            <div className="text-sm space-y-2 opacity-90">
+              <p className="font-semibold uppercase">
+                Công ty TNHH CTRL-S
+              </p>
+              <p>MST: 0316739083</p>
             </div>
 
             {/* SOCIAL */}
-            <div>
-              <h3 className="text-3xl tracking-wider mb-10">SOCIAL MEDIA</h3>
+            <div className="flex gap-4 pt-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full border border-[var(--primary)] hover:bg-[var(--primary)] transition"
+              >
+                <FaFacebookF />
+              </a>
 
-              <p className="mb-4 text-lg break-all md:break-normal">
-                Fanpage:{" "}
-                <a
-                  href="https://www.facebook.com/ctrlscoltd"
-                  target="_blank"
-                  className="underline hover:text-[var(--primary)]"
-                >
-                  https://www.facebook.com/ctrlscoltd
-                </a>
-              </p>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full border border-[var(--primary)] hover:bg-[var(--primary)] transition"
+              >
+                <FaYoutube />
+              </a>
 
-              <p className="text-lg break-all md:break-normal">
-                Tiktok:{" "}
-                <a
-                  href="https://www.tiktok.com/@ctrlscoltd"
-                  target="_blank"
-                  className="underline hover:text-[var(--primary)]"
-                >
-                  https://www.tiktok.com/@ctrlscoltd
-                </a>
-              </p>
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full border border-[var(--primary)] hover:bg-[var(--primary)] transition"
+              >
+                <FaTiktok />
+              </a>
             </div>
           </div>
 
-          {/* RIGHT */}
-          <div className="space-y-16 text-center md:text-left flex flex-col items-center md:items-start">
-            {/* ADDRESS */}
-            <div>
-              <h3 className="text-3xl tracking-wider mb-10">ADDRESS</h3>
+          {/* SERVICES */}
+          <div className="space-y-6">
+            <h3 className="font-semibold tracking-wide uppercase">
+              Services
+            </h3>
 
-              <p className="uppercase tracking-widest mb-2">
-                HO CHI MINH OFFICE
-              </p>
-              <p className="text-xl leading-relaxed max-w-md mx-auto md:mx-0">
-                9/11B/5 Pham Hung St, Chanh Hung Ward, Ho Chi Minh City.
-              </p>
-            </div>
+            <ul className="space-y-3 text-sm opacity-90">
+              <li>Full show package</li>
+              <li>Production</li>
+              <li>Media – Entertainment</li>
+            </ul>
+          </div>
 
-            {/* QR */}
-            <div>
-              <Image
-                src="/imgs/qr.png"
-                alt="QR Code"
-                width={160}
-                height={160}
-                className="border border-[var(--primary)]/90 "
-              />
+          {/* PORTFOLIO */}
+          <div className="space-y-6">
+            <h3 className="font-semibold tracking-wide uppercase">
+              Portfolio
+            </h3>
+
+            <a
+              href="/ctrls-portfolio.pdf"
+              download
+              className="text-sm opacity-90 underline hover:text-[var(--primary)] transition"
+            >
+              Download here
+            </a>
+
+            <Image
+              src="/imgs/qr.png"
+              alt="QR Portfolio"
+              width={140}
+              height={140}
+              className="rounded-lg"
+            />
+          </div>
+
+          {/* CONTACT */}
+          <div className="space-y-6">
+            <h3 className="font-semibold tracking-wide uppercase">
+              Contact
+            </h3>
+
+            <div className="space-y-4 text-sm opacity-90">
+              {/* ADDRESS */}
+              <a
+                href="https://maps.google.com/?q=9/11B/5 Phạm Hùng, Bình Hưng, TP.HCM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 hover:text-[var(--primary)] transition"
+              >
+                <FaMapMarkerAlt className="mt-1 text-[var(--primary)]" />
+                <span>
+                  9/11B/5 Phạm Hùng St, Bình Hưng Ward,
+                  Ho Chi Minh City
+                </span>
+              </a>
+
+              {/* PHONE */}
+              <a
+                href="tel:0939735071"
+                className="flex items-center gap-3 hover:text-[var(--primary)] transition"
+              >
+                <FaPhoneAlt className="text-[var(--primary)]" />
+                <span>0939 735 071</span>
+              </a>
+
+              {/* EMAIL 1 */}
+              <a
+                href="mailto:ctrlscompany@gmail.com"
+                className="flex items-center gap-3 hover:text-[var(--primary)] transition"
+              >
+                <FaEnvelope className="text-[var(--primary)]" />
+                <span>ctrlscompany@gmail.com</span>
+              </a>
+
+              {/* EMAIL 2 */}
+              <a
+                href="mailto:truongbao.ctrls@gmail.com"
+                className="flex items-center gap-3 hover:text-[var(--primary)] transition"
+              >
+                <FaEnvelope className="text-[var(--primary)]" />
+                <span>truongbao.ctrls@gmail.com</span>
+              </a>
             </div>
           </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-24 text-center text-xs opacity-50">
+          © {new Date().getFullYear()} CTRL-S. All rights reserved.
         </div>
       </div>
     </section>

@@ -1,185 +1,121 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+
+type FeedbackItem = {
+  name: string;
+  title: string;
+  avatar: string;
+  content: string;
+};
+
+const FEEDBACKS: FeedbackItem[] = [
+  {
+    name: "NGUYỄN MINH CƯỜNG",
+    title: "Giám đốc TC Multimedia",
+    avatar: "/feedback/1.jpg",
+    content:
+      "Màn hình LED sắc nét, hiển thị màu chuẩn, không bị sọc hay lẫn hình livestream. Đội ngũ kỹ thuật hỗ trợ test trước và setup rất nhiệt tình.",
+  },
+  {
+    name: "NGUYỄN HOÀNG VŨ",
+    title: "Giám đốc H.O.S.T Academy",
+    avatar: "/feedback/2.jpg",
+    content:
+      "Các sản phẩm truyền thông trước và sau sự kiện được thiết kế đồng bộ, giúp nhận diện thương hiệu tốt trên các nền tảng mạng xã hội.",
+  },
+  {
+    name: "VÕ VIỆT CHUNG",
+    title: "Chủ tịch Hoa hậu Đại dương Việt Nam",
+    avatar: "/feedback/3.jpg",
+    content:
+      "Khả năng sản xuất chương trình chuyên nghiệp, bố trí layout sân khấu hợp lý và hiệu ứng chuyển cảnh rất ấn tượng.",
+  },
+  {
+    name: "NGUYỄN THANH TÂM",
+    title: "Ban Văn hóa FPT Software",
+    avatar: "/feedback/4.jpg",
+    content:
+      "Trang thiết bị hiện đại, đồng bộ. Quy trình tổ chức chặt chẽ, đảm bảo an toàn và đúng timeline sự kiện.",
+  },
+  {
+    name: "CHUNG QUỐC PHONG",
+    title: "Trưởng phòng Tuyển sinh HUFLIT",
+    avatar: "/feedback/5.jpg",
+    content:
+      "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức nhiều loại hình sự kiện khác nhau.",
+  },
+  {
+    name: "BÙI KIM THANH THU",
+    title: "Trợ lý Trưởng đoàn – IPS & Hapo Centrosa",
+    avatar: "/feedback/6.jpg",
+    content:
+      "Khâu vận hành rất trơn tru, từ đón tiếp đại biểu đến điều phối sân khấu đều rõ ràng và chính xác.",
+  },
+  {
+    name: "NGUYỄN HẢI ĐĂNG",
+    title: "MC / Biên tập viên VTV",
+    avatar: "/feedback/7.jpg",
+    content:
+      "Kịch bản sáng tạo, ekip kiểm soát timeline tốt và xử lý tình huống phát sinh rất nhanh.",
+  },
+];
 
 export default function Feedback() {
-  const categories = [
-    "Full show package",
-    "Production",
-    "Media - Entertainment",
-  ];
-
-  const feedbacks = [
-    {
-      category: "Full show package",
-      name: "ThS Chung Quốc Phong",
-      role: "Trưởng phòng Tuyển sinh",
-      company: "HUFLIT",
-      avatar: "/feedback/feedback-1.png",
-      quote:
-        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
-    },
-    {
-      category: "Production",
-      name: "ThS Chung Quốc Phong",
-      role: "Trưởng phòng Tuyển sinh",
-      company: "HUFLIT",
-      avatar: "/feedback/feedback-1.png",
-      quote:
-        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
-    },
-    {
-      category: "Media - Entertainment",
-      name: "ThS Chung Quốc Phong",
-      role: "Trưởng phòng Tuyển sinh",
-      company: "HUFLIT",
-      avatar: "/feedback/feedback-1.png",
-      quote:
-        "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức được đa dạng các loại hình, đảm bảo không khí luôn sôi động và gắn kết.",
-    },
-  ];
-
-  const [activeTab, setActiveTab] = useState(categories[0]);
-  const [index, setIndex] = useState(0);
-
-  const filtered = feedbacks.filter(
-    (item) => item.category === activeTab
-  );
-
-  // 👉 Bảo vệ crash
-  if (filtered.length === 0) return null;
-
-  const prev = () =>
-    setIndex((i) => (i === 0 ? filtered.length - 1 : i - 1));
-  const next = () =>
-    setIndex((i) => (i === filtered.length - 1 ? 0 : i + 1));
+  const topRow = FEEDBACKS.slice(0, 3);
+  const bottomRow = FEEDBACKS.slice(3);
 
   return (
-    <section
-      id="feedback"
-      className="relative min-h-screen flex items-center text-white overflow-hidden"
-    >
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-
+    <section id="feedback" className="py-32 text-white">
+      <div className="max-w-7xl mx-auto px-6">
         {/* TITLE */}
-        <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl font-serif tracking-wider text-shadow">
-            FEEDBACK
-          </h2>
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif tracking-wider text-gold-gradient text-shadow">
-            WHAT OUR CLIENTS SAY
-          </h3>
-        </div>
+        <h2 className="text-center mb-24 text-4xl md:text-6xl font-bold tracking-wider">
+          <span className="text-gold-gradient bg-clip-text text-transparent">
+            CLIENT’S FEEDBACK
+          </span>
+        </h2>
 
-        {/* CATEGORY TABS */}
-        <div className="flex justify-center mb-20 overflow-x-auto">
-          <div
-            className="
-              flex rounded-full overflow-hidden min-w-max
-              bg-gradient-to-r
-              from-[var(--primary)]
-              via-[var(--black)]
-              to-[var(--primary)]
-              shadow-lg
-            "
-          >
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {setActiveTab(cat); setIndex(0);}}
-                className={`
-                  px-8 py-3 text-sm md:text-base uppercase tracking-wider
-                  whitespace-nowrap
-                  transition-all duration-300 
-                  ${
-                    activeTab === cat
-                      ? "bg-black/30 text-white"
-                      : "text-white/80 hover:bg-black/20"
-                  }
-                `}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* DESKTOP */}
-        <div
-          className={`hidden md:grid gap-12 mb-20 ${
-            filtered.length === 1
-              ? "grid-cols-1 place-items-center"
-              : filtered.length === 2
-              ? "grid-cols-2 place-items-center"
-              : "grid-cols-3"
-          }`}
-        >
-          {filtered.map((item, i) => (
-            <FeedbackCard key={i} {...item} />
+        {/* ===== ROW 1: 3 ITEMS ===== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-20 justify-center mb-20">
+          {topRow.map((item, idx) => (
+            <FeedbackCard key={idx} item={item} />
           ))}
         </div>
 
-        {/* MOBILE SLIDER */}
-        <div className="md:hidden flex items-center justify-center gap-6 mb-20">
-          <button
-            onClick={prev}
-            className="p-2 rounded-full border border-white/60 transition"
-          >
-            <HiChevronLeft className="text-2xl" />
-          </button>
-
-          <FeedbackCard {...filtered[index]} />
-
-          <button
-            onClick={next}
-            className="p-2 rounded-full border border-white/60 transition"
-          >
-            <HiChevronRight className="text-2xl" />
-          </button>
+        {/* ===== ROW 2: 4 ITEMS ===== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20 justify-center">
+          {bottomRow.map((item, idx) => (
+            <FeedbackCard key={idx} item={item} />
+          ))}
         </div>
-
       </div>
     </section>
   );
 }
 
-/* ---------- Feedback Card ---------- */
-function FeedbackCard({
-  name,
-  role,
-  company,
-  avatar,
-  quote,
-}: {
-  name: string;
-  role: string;
-  company: string;
-  avatar: string;
-  quote: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-center max-w-sm mx-auto">
+/* ================= CARD ================= */
 
-      <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[#7a5a23] shadow-lg mb-8">
+function FeedbackCard({ item }: { item: FeedbackItem }) {
+  return (
+    <div className="text-center space-y-6 max-w-sm mx-auto">
+      {/* AVATAR */}
+      <div className="relative mx-auto w-28 h-28 rounded-full border-4 border-[var(--primary)] overflow-hidden">
         <Image
-          src={avatar}
-          alt={name}
-          width={128}
-          height={128}
-          className="object-cover w-full h-full"
+          src={item.avatar}
+          alt={item.name}
+          fill
+          className="object-cover"
         />
       </div>
 
-      <p className="text-lg italic leading-relaxed mb-8 text-shadow">
-        “{quote}”
+      {/* CONTENT */}
+      <p className="italic text-sm leading-relaxed opacity-90">
+        “{item.content}”
       </p>
 
-      <h4 className="text-xl tracking-wide text-shadow">{name}</h4>
-      <p className="text-sm uppercase tracking-wider opacity-80 text-shadow">
-        {role} · {company}
-      </p>
+      {/* NAME */}
+      <div>
+        <p className="font-semibold tracking-wide">{item.name}</p>
+        <p className="text-xs opacity-70 mt-1">{item.title}</p>
+      </div>
     </div>
   );
 }
