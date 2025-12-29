@@ -10,27 +10,27 @@ type Product = {
 const PRODUCTS: Product[] = [
   {
     title: "CHƯƠNG TRÌNH 20/11 – NHỮNG NGƯỜI THẦY CHÂN CHÍNH 2025",
-    images: ["/p1-1.jpg", "/p1-2.jpg", "/p1-3.jpg"],
+    images: ["/imgs/products/nguoi-thay-chan-chinh/1.jpg", "/imgs/products/nguoi-thay-chan-chinh/2.jpg", "/imgs/products/nguoi-thay-chan-chinh/3.jpg"],
   },
   {
     title: "NỐT THƯƠNG 2",
-    images: ["/p2-1.jpg", "/p2-2.jpg", "/p2-3.jpg"],
+    images: ["/imgs/products/not-thuong-2/1.jpg", "/imgs/products/not-thuong-2/2.jpg", "/imgs/products/not-thuong-2/3.jpg"],
   },
   {
     title: "WOWFEST – VIBE ON THE WHEELS 2025",
-    images: ["/p3-1.jpg", "/p3-2.jpg", "/p3-3.jpg"],
+    images: ["/imgs/products/wowfest/1.jpg", "/imgs/products/wowfest/2.jpg", "/imgs/products/wowfest/3.jpg"],
   },
   {
     title: "HOA HẬU ĐẠI DƯƠNG 2025",
-    images: ["/p3-1.jpg", "/p3-2.jpg", "/p3-3.jpg"],
+    images: ["/imgs/products/hoa-hau-dai-duong/1.jpg", "/imgs/products/hoa-hau-dai-duong/2.jpg", "/imgs/products/hoa-hau-dai-duong/3.jpg"],
   },
   {
     title: "SEA GAME 31",
-    images: ["/p3-1.jpg", "/p3-2.jpg", "/p3-3.jpg"],
+    images: ["/imgs/products/sea-game-31/1.jpg", "/imgs/products/sea-game-31/2.jpg", "/imgs/products/sea-game-31/3.jpg"],
   },
   {
     title: "TÀU BLUE DRAGON 01 – CẢNG HẢI LINH",
-    images: ["/p3-1.jpg", "/p3-2.jpg", "/p3-3.jpg"],
+    images: ["/imgs/products/blue-dragon/1.jpg", "/imgs/products/blue-dragon/2.jpg", "/imgs/products/blue-dragon/3.jpg"],
   },
 ];
 
@@ -44,19 +44,19 @@ type Video = {
 const VIDEOS: Video[] = [
   {
     title: "CHƯƠNG TRÌNH 20/11 – NHỮNG NGƯỜI THẦY CHÂN CHÍNH",
-    youtubeId: "VIDEO_ID_1",
+    youtubeId: "ELdGI7vYrZg ",
   },
   {
     title: "ĐÊM NHẠC CHẮP TAY HOA",
-    youtubeId: "VIDEO_ID_2",
+    youtubeId: "MjXi8684Bbo",
   },
   {
     title: "TÀU BLUE DRAGON 01 – CẢNG HẢI LINH - LNG CÁI MÉP",
-    youtubeId: "VIDEO_ID_3",
+    youtubeId: "KRgqpJDbRgY ",
   },
   {
     title: "CÔNG TY TNHH YOUNG IL VIỆT NAM",
-    youtubeId: "VIDEO_ID_4",
+    youtubeId: "ktpfCVIsbkk ",
   },
 ];
 

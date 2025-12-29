@@ -11,49 +11,49 @@ const FEEDBACKS: FeedbackItem[] = [
   {
     name: "NGUYỄN MINH CƯỜNG",
     title: "Giám đốc TC Multimedia",
-    avatar: "/feedback/1.jpg",
+    avatar: "/imgs/feedback/nguyen-minh-cuong.png",
     content:
       "Màn hình LED sắc nét, hiển thị màu chuẩn, không bị sọc hay lẫn hình livestream. Đội ngũ kỹ thuật hỗ trợ test trước và setup rất nhiệt tình.",
   },
   {
     name: "NGUYỄN HOÀNG VŨ",
     title: "Giám đốc H.O.S.T Academy",
-    avatar: "/feedback/2.jpg",
+    avatar: "/imgs/feedback/nguyen-hoang-vu.png",
     content:
       "Các sản phẩm truyền thông trước và sau sự kiện được thiết kế đồng bộ, giúp nhận diện thương hiệu tốt trên các nền tảng mạng xã hội.",
   },
   {
     name: "VÕ VIỆT CHUNG",
     title: "Chủ tịch Hoa hậu Đại dương Việt Nam",
-    avatar: "/feedback/3.jpg",
+    avatar: "/imgs/feedback/vo-viet-chung.png",
     content:
       "Khả năng sản xuất chương trình chuyên nghiệp, bố trí layout sân khấu hợp lý và hiệu ứng chuyển cảnh rất ấn tượng.",
   },
   {
     name: "NGUYỄN THANH TÂM",
     title: "Ban Văn hóa FPT Software",
-    avatar: "/feedback/4.jpg",
+    avatar: "/imgs/feedback/nguyen-thanh-tam.png",
     content:
       "Trang thiết bị hiện đại, đồng bộ. Quy trình tổ chức chặt chẽ, đảm bảo an toàn và đúng timeline sự kiện.",
   },
   {
     name: "CHUNG QUỐC PHONG",
     title: "Trưởng phòng Tuyển sinh HUFLIT",
-    avatar: "/feedback/5.jpg",
+    avatar: "/imgs/feedback/chung-quoc-phong.png",
     content:
       "CTRL-S thể hiện sự linh hoạt và chuyên nghiệp cao khi tổ chức nhiều loại hình sự kiện khác nhau.",
   },
   {
     name: "BÙI KIM THANH THU",
     title: "Trợ lý Trưởng đoàn – IPS & Hapo Centrosa",
-    avatar: "/feedback/6.jpg",
+    avatar: "/imgs/feedback/bui-kim-thanh-thu.png",
     content:
       "Khâu vận hành rất trơn tru, từ đón tiếp đại biểu đến điều phối sân khấu đều rõ ràng và chính xác.",
   },
   {
     name: "NGUYỄN HẢI ĐĂNG",
     title: "MC / Biên tập viên VTV",
-    avatar: "/feedback/7.jpg",
+    avatar: "/imgs/feedback/nguyen-hai-dang.png",
     content:
       "Kịch bản sáng tạo, ekip kiểm soát timeline tốt và xử lý tình huống phát sinh rất nhanh.",
   },

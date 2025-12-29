@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CtrlS - Lưu giữu giá trị của bạn",
+  title: "CtrlS - Lưu giữ giá trị của bạn",
   description: "Creative – Media – Entertainment",
   icons: {
     icon: "/icon.png",
