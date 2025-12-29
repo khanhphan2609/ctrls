@@ -1,4 +1,9 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+
+/* ================= DATA ================= */
 
 type FeedbackItem = {
   name: string;
@@ -59,63 +64,116 @@ const FEEDBACKS: FeedbackItem[] = [
   },
 ];
 
-export default function Feedback() {
-  const topRow = FEEDBACKS.slice(0, 3);
-  const bottomRow = FEEDBACKS.slice(3);
-
-  return (
-    <section id="feedback" className="py-32 text-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* TITLE */}
-        <h2 className="text-center mb-24 text-4xl md:text-6xl font-bold tracking-wider">
-          <span className="text-gold-gradient bg-clip-text text-transparent">
-            CLIENT’S FEEDBACK
-          </span>
-        </h2>
-
-        {/* ===== ROW 1: 3 ITEMS ===== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-20 justify-center mb-20">
-          {topRow.map((item, idx) => (
-            <FeedbackCard key={idx} item={item} />
-          ))}
-        </div>
-
-        {/* ===== ROW 2: 4 ITEMS ===== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20 justify-center">
-          {bottomRow.map((item, idx) => (
-            <FeedbackCard key={idx} item={item} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ================= CARD ================= */
 
 function FeedbackCard({ item }: { item: FeedbackItem }) {
   return (
-    <div className="text-center space-y-6 max-w-sm mx-auto">
-      {/* AVATAR */}
+    <div className="text-center space-y-6 max-w-sm mx-auto px-4">
       <div className="relative mx-auto w-28 h-28 rounded-full border-4 border-[var(--primary)] overflow-hidden">
-        <Image
-          src={item.avatar}
-          alt={item.name}
-          fill
-          className="object-cover"
-        />
+        <Image src={item.avatar} alt={item.name} fill className="object-cover" />
       </div>
 
-      {/* CONTENT */}
       <p className="italic text-sm leading-relaxed opacity-90">
         “{item.content}”
       </p>
 
-      {/* NAME */}
       <div>
         <p className="font-semibold tracking-wide">{item.name}</p>
         <p className="text-xs opacity-70 mt-1">{item.title}</p>
       </div>
     </div>
+  );
+}
+
+/* ================= PAGE ================= */
+
+export default function Feedback() {
+  const [current, setCurrent] = useState(0);
+  const startX = useRef(0);
+  const total = FEEDBACKS.length;
+
+  const next = () => setCurrent((i) => (i + 1) % total);
+  const prev = () => setCurrent((i) => (i - 1 + total) % total);
+
+  /* ===== AUTO SLIDE ===== */
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  /* ===== TOUCH ===== */
+  const onTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const delta = e.changedTouches[0].clientX - startX.current;
+    if (delta > 50) prev();
+    if (delta < -50) next();
+  };
+
+  const topRow = FEEDBACKS.slice(0, 3);
+  const bottomRow = FEEDBACKS.slice(3);
+
+  return (
+    <section id="feedback" className="py-32 text-white">
+      <div className="max-w-7xl mx-auto px-6 space-y-24">
+
+        {/* TITLE */}
+        <h2 className="text-center text-4xl md:text-6xl font-bold tracking-wider">
+          <span className="text-gold-gradient">CLIENT’S FEEDBACK</span>
+        </h2>
+
+        {/* ================= MOBILE SLIDER ================= */}
+        <div
+          className="block md:hidden overflow-hidden"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {FEEDBACKS.map((item, idx) => (
+              <div key={idx} className="min-w-full">
+                <FeedbackCard item={item} />
+              </div>
+            ))}
+          </div>
+
+          {/* DOTS */}
+          <div className="flex justify-center gap-3 mt-10">
+            {FEEDBACKS.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrent(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition
+                  ${
+                    idx === current
+                      ? "bg-white"
+                      : "bg-white/30 hover:bg-white/60"
+                  }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ================= DESKTOP ================= */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-20 mb-20">
+            {topRow.map((item, idx) => (
+              <FeedbackCard key={idx} item={item} />
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
+            {bottomRow.map((item, idx) => (
+              <FeedbackCard key={idx} item={item} />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
   );
 }
