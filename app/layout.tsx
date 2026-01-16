@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const UTM_AVO = localFont({
+  src: "../public/fonts/utm-avo-webfont/utm-avo.woff",
+  variable: "--font-UTM_AVO",
 });
 
 const geistMono = Geist_Mono({
@@ -20,17 +21,23 @@ export const metadata: Metadata = {
   },
 };
 
+import Header from "@/components/Header";
+import FloatingSocials from "@/components/FloatingSocials";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${UTM_AVO.variable} ${geistMono.variable} antialiased bg-black`}
+        suppressHydrationWarning
       >
-        {children}
+        <Header />
+        <main>{children}</main>
+        <FloatingSocials />
       </body>
     </html>
   );

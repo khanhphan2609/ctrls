@@ -21,11 +21,11 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="min-h-screen flex items-center overflow-hidden"
+      className="relative py-20 md:py-0 md:min-h-screen flex md:items-center overflow-hidden"
     >
       <div className="z-10 max-w-7xl mx-auto px-6 w-full">
         {/* TITLE */}
-        <h2 className="text-center mb-24 text-4xl md:text-6xl font-bold tracking-wider">
+        <h2 className="text-center mb-16 md:mb-24 text-3xl sm:text-4xl md:text-6xl font-bold tracking-wider">
           <span className="bg-gradient-to-r text-gold-gradient bg-clip-text text-transparent">
             OUR SERVICES
           </span>
@@ -58,7 +58,7 @@ function ServiceCard({ title, image }: { title: string; image: string }) {
         {title}
       </h2>
       {/* IMAGE */}
-      <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#d6b26f] shadow-lg mb-8">
+      <div className="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-[#d6b26f] shadow-lg mb-8">
         <Image
           src={image}
           alt={title}

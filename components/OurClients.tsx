@@ -2,14 +2,21 @@ import Image from "next/image";
 import "./OurClients.css"
 
 const logos: string[] = Array.from(
-  { length: 33 },
+  { length: 32 },
   (_, i) => `/imgs/logo_clients/${i + 1}.png`
 );
 
-// chia logo làm 2 hàng
-const middle = Math.ceil(logos.length / 2);
-const row1 = logos.slice(0, middle);
-const row2 = logos.slice(middle);
+// Desktop: 4 rows
+const logosPerRowDesktop = Math.ceil(logos.length / 4);
+const row1 = logos.slice(0, logosPerRowDesktop);
+const row2 = logos.slice(logosPerRowDesktop, logosPerRowDesktop * 2);
+const row3 = logos.slice(logosPerRowDesktop * 2, logosPerRowDesktop * 3);
+const row4 = logos.slice(logosPerRowDesktop * 3);
+
+// Mobile: 2 rows
+const logosPerRowMobile = Math.ceil(logos.length / 2);
+const row1Mob = logos.slice(0, logosPerRowMobile);
+const row2Mob = logos.slice(logosPerRowMobile);
 
 type LogoRowProps = {
   items: string[];
@@ -18,12 +25,11 @@ type LogoRowProps = {
 
 function LogoRow({ items, reverse = false }: LogoRowProps) {
   return (
-    <div className="overflow-hidden marquee-hover">
+    <div className="w-full overflow-hidden marquee-hover">
       <div
         className={`
           flex
           w-max
-          gap-14
           ${reverse ? "animate-marquee-reverse" : "animate-marquee"}
         `}
       >
@@ -34,18 +40,34 @@ function LogoRow({ items, reverse = false }: LogoRowProps) {
               relative
               w-28
               h-20
+              md:w-32
+              md:h-24
+              mx-4
+              md:mx-6
               flex-shrink-0
-              opacity-80
-              hover:opacity-100
-              transition
+              bg-white
+              rounded-lg
+              p-2
+              md:p-3
+              shadow-lg
+              flex
+              items-center
+              justify-center
+              transition-transform
+              duration-300
+              lg:hover:scale-105
             "
           >
-            <Image
-              src={src}
-              alt={`Client logo ${idx + 1}`}
-              fill
-              className="object-contain"
-            />
+            <div className="relative w-full h-full">
+              <Image
+                src={src}
+                alt="Client Logo"
+                fill
+                className="object-contain"
+                unoptimized
+                sizes="(max-width: 768px) 112px, 128px"
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -57,16 +79,22 @@ export default function OurClients() {
   return (
     <section id="clients" className="py-32 text-white">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-center mb-20 text-4xl md:text-6xl font-bold">
+        <h2 className="text-center mb-16 md:mb-20 text-3xl sm:text-4xl md:text-6xl font-bold">
           <span className="text-gold-gradient">OUR CLIENT</span>
         </h2>
 
-        <div className="space-y-14">
-          {/* Hàng 1 → trôi trái */}
+        {/* DESKTOP VIEW: 4 ROWS */}
+        <div className="hidden md:flex flex-col space-y-14">
           <LogoRow items={row1} />
-
-          {/* Hàng 2 → trôi phải (NGƯỢC CHIỀU) */}
           <LogoRow items={row2} reverse />
+          <LogoRow items={row3} />
+          <LogoRow items={row4} reverse />
+        </div>
+
+        {/* MOBILE VIEW: 2 ROWS */}
+        <div className="flex md:hidden flex-col space-y-20">
+          <LogoRow items={row1Mob} />
+          <LogoRow items={row2Mob} reverse />
         </div>
       </div>
     </section>

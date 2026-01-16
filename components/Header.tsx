@@ -2,31 +2,29 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  FaHome,
   FaPhoneAlt,
-  FaServicestack,
-  FaBriefcase,
-  FaCommentDots,
-  FaEnvelope,
+  FaHome,
 } from "react-icons/fa";
 
 /* ===== NAV CONFIG ===== */
 const NAV_ITEMS = [
-  { id: "about", label: "About Us", icon: <FaHome /> },
-  { id: "services", label: "Services", icon: <FaServicestack /> },
-  { id: "portfolio", label: "Portfolio", icon: <FaBriefcase /> },
-  { id: "clients", label: "Case Study", icon: <FaCommentDots /> },
-  { id: "contact", label: "Contact", icon: <FaEnvelope /> },
+  { id: "about", label: "About us" },
+  { id: "portfolio", label: "Profile" },
+  { id: "services", label: "Services" },
+  { id: "clients", label: "Case Study" },
+  { id: "contact", label: "Contact" },
 ];
 
 const MOBILE_NAV_ITEMS = NAV_ITEMS;
 
 const GRADIENT =
-  "bg-[linear-gradient(180deg,#d6b26f_0%,#b37c11_50%,#d6b26f_100%)]";
+  "bg-[linear-gradient(45deg,#efd18a_0%,#e1b85f_18%,#cf9f3d_50%,#e1b85f_82%,#efd18a_100%)]";
 
 export default function Header() {
   const [active, setActive] = useState("about");
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const navRef = useRef<HTMLDivElement>(null);
   const indicatorRef = useRef<HTMLSpanElement>(null);
@@ -34,13 +32,57 @@ export default function Header() {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    setIsScrolling(true);
+    setActive(id);
+
+    const isMobile = window.innerWidth < 1280; // Matches xl breakpoint
+    let offset = 0;
+
+    if (id === "about") {
+      offset = 0;
+    } else if (isMobile) {
+      // Mobile: Negative offsets compensate for component padding (py-20, py-32)
+      // so the title is framed perfectly just below the 60px fixed header.
+      if (id === "portfolio") offset = -20; // 80 - 20 = 60px (under bar)
+      else if (id === "services") offset = -20; // Corrected jump for py-20 section
+      else offset = -68; // 128 - 68 = 60px (under bar)
+    } else {
+      offset = 100;
+    }
+
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = el.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+
+    // Reset isScrolling after animation completes
+    setTimeout(() => setIsScrolling(false), 1000);
   };
 
   /* ===== SCROLL SPY ===== */
   useEffect(() => {
     const onScroll = () => {
-      const y = window.scrollY + 140;
+      if (isScrolling) return;
+
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      const isMobile = window.innerWidth < 1280;
+
+      // Handle bottom of page - more generous threshold for short mobile devices
+      if (scrollPosition + windowHeight >= documentHeight - (isMobile ? 150 : 50)) {
+        setActive("contact");
+        return;
+      }
+
+      const y = scrollPosition + (isMobile ? 110 : 150);
       NAV_ITEMS.forEach((item) => {
         const section = document.getElementById(item.id);
         if (
@@ -56,7 +98,7 @@ export default function Header() {
     window.addEventListener("scroll", onScroll);
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isScrolling]);
 
   /* ===== DESKTOP INDICATOR ===== */
   useEffect(() => {
@@ -75,29 +117,29 @@ export default function Header() {
   return (
     <header className="fixed top-0 w-full z-50">
       {/* ================= MOBILE TOP BAR ================= */}
-      <div className="xl:hidden backdrop-blur bg-black/30 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-2 items-center">
-          <a href="#about">
-            <Image src="/logo-slogan.png" alt="CTRL-S" width={80} height={32} />
+      <div className="xl:hidden">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+          <a href="#about" className="flex-shrink-0">
+            <Image src="/logo-slogan.png" alt="CTRL-S" width={70} height={28} className="object-contain" />
           </a>
 
-          <a href="tel:0939735071" className="flex justify-end items-center gap-2">
-            <span className="w-9 h-9 flex items-center justify-center rounded-full border-2 border-[#d6b26f] text-[#d6b26f]">
-              <FaPhoneAlt className="text-sm" />
+          <a href="https://zalo.me/0939735071" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 sm:gap-2">
+            <span className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full border border-[#d6b26f] text-[#d6b26f]">
+              <FaPhoneAlt className="text-[10px] sm:text-xs" />
             </span>
-            <span className="text-sm font-bold text-white">0939 735 071</span>
+            <span className="text-[11px] sm:text-sm font-bold text-white whitespace-nowrap">0939 735 071</span>
           </a>
         </div>
       </div>
 
       {/* ================= DESKTOP HEADER ================= */}
-      <div className="hidden xl:block backdrop-blur bg-black/30 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-12 items-center">
+      <div className="hidden xl:block">
+        <div className="max-w-7xl mx-auto px-8 py-8 grid grid-cols-12 items-center">
           {/* LOGO */}
           <div className="col-span-2">
-            <a href="">
-              <Image src="/logo-slogan.png" alt="CTRL-S" width={100} height={40} />
-            </a>
+            <Link href="/">
+              <Image src="/logo-slogan.png" alt="CTRL-S" width={140} height={80} />
+            </Link>
           </div>
 
           {/* MENU */}
@@ -106,12 +148,12 @@ export default function Header() {
               ref={navRef}
               className={`
                 relative flex items-center gap-10
-                px-14 py-4 rounded-full
-                text-sm uppercase font-bold text-white
+                px-12 py-4 rounded-2xl 
+                  text-white
                 ${GRADIENT}
-                shadow-[0_10px_40px_rgba(0,0,0,0.6)]
               `}
             >
+              {/* MENU ITEM */}
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.id}
@@ -122,11 +164,10 @@ export default function Header() {
                     setActive(item.id);
                     scrollToSection(item.id);
                   }}
-                  className={`flex items-center gap-2 transition ${
-                    active === item.id ? "opacity-100" : "opacity-70"
-                  }`}
+                  className={`flex  text-base md:text-2xl items-center gap-2 transition ${active === item.id ? "opacity-100" : "opacity-70"
+                    }`}
                 >
-                  {item.icon}
+                  {item.id === "about" ? <FaHome /> : ""}
                   {item.label}
                 </a>
               ))}
@@ -137,14 +178,17 @@ export default function Header() {
               />
             </nav>
           </div>
-
-          {/* HOTLINE */}
           <div className="col-span-2 flex justify-end">
-            <a href="tel:0939735071" className="flex items-center gap-2">
-              <span className="w-9 h-9 flex items-center justify-center rounded-full border-2 border-[#d6b26f] text-[#d6b26f]">
+            <a
+              href="https://zalo.me/0939735071"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <span className="w-10 h-10 flex items-center justify-center rounded-full border-2 border-[#d6b26f] text-[#d6b26f]">
                 <FaPhoneAlt className="text-xs" />
               </span>
-              <span className="text-sm font-bold text-white">
+              <span className="text-sm lg:text-base font-bold text-white">
                 0939 735 071
               </span>
             </a>
@@ -170,16 +214,14 @@ export default function Header() {
                 setActive(item.id);
                 scrollToSection(item.id);
               }}
-              className={`flex flex-col items-center gap-1 transition ${
-                active === item.id ? "opacity-100 bg-white/20" : "opacity-70"
-              }`}
+              className={`flex flex-col items-center gap-1 transition ${active === item.id ? "opacity-100 bg-white/20" : "opacity-70"
+                }`}
             >
-              <span className="text-base">{item.icon}</span>
               <span className="text-[9px] uppercase">{item.label}</span>
             </button>
           ))}
         </nav>
       </div>
-    </header>
+    </header >
   );
 }

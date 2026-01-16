@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
 /* ================= DATA ================= */
@@ -50,7 +50,7 @@ const FEEDBACKS: FeedbackItem[] = [
   },
   {
     name: "BÙI KIM THANH THU",
-    title: "Trợ lý Trưởng đoàn – IPS & Hapo Centrosa",
+    title: "Trợ lý Trưởng ban, Ban Quản lí tòa IRIS - HaDo Centrosa",
     avatar: "/imgs/feedback/bui-kim-thanh-thu.png",
     content:
       "Khâu vận hành rất trơn tru, từ đón tiếp đại biểu đến điều phối sân khấu đều rõ ràng và chính xác.",
@@ -68,18 +68,33 @@ const FEEDBACKS: FeedbackItem[] = [
 
 function FeedbackCard({ item }: { item: FeedbackItem }) {
   return (
-    <div className="text-center space-y-6 max-w-sm mx-auto px-4">
-      <div className="relative mx-auto w-28 h-28 rounded-full border-4 border-[var(--primary)] overflow-hidden">
-        <Image src={item.avatar} alt={item.name} fill className="object-cover" />
+    <div className="text-center flex flex-col h-full space-y-6 max-w-sm mx-auto px-1">
+      {/* Avatar with fixed sizing and no cropping at the top */}
+      <div className="relative mx-auto w-28 h-28 sm:w-34 sm:h-34 rounded-full border-4 border-[var(--primary)] overflow-hidden shrink-0 shadow-lg">
+        <Image
+          src={item.avatar}
+          alt={item.name}
+          fill
+          className="object-cover object-top"
+        />
       </div>
 
-      <p className="italic text-sm leading-relaxed opacity-90">
-        “{item.content}”
-      </p>
+      {/* Content area with flex-1 to push the footer down, ensuring horizontal alignment of names */}
+      <div className="flex-1 flex items-center justify-center py-2">
+        <p
+          className="italic text-base leading-relaxed opacity-100 text-justify"
+          style={{ textWrap: 'pretty', textAlignLast: 'center' }}
+        >
+          “{item.content}”
+        </p>
+      </div>
 
-      <div>
-        <p className="font-semibold tracking-wide">{item.name}</p>
-        <p className="text-xs opacity-70 mt-1">{item.title}</p>
+      {/* Footer area for Name and Title */}
+      <div className="shrink-0 pt-2 border-t border-white/10">
+        <p className="font-semibold tracking-wide text-lg ">{item.name}</p>
+        <p className="text-sm md:text-base opacity-100 mt-1 min-h-[3rem] flex items-start justify-center">
+          {item.title}
+        </p>
       </div>
     </div>
   );
@@ -92,14 +107,13 @@ export default function Feedback() {
   const startX = useRef(0);
   const total = FEEDBACKS.length;
 
-  const next = () => setCurrent((i) => (i + 1) % total);
-  const prev = () => setCurrent((i) => (i - 1 + total) % total);
+  const next = useCallback(() => setCurrent((i) => (i + 1) % total), [total]);
+  const prev = useCallback(() => setCurrent((i) => (i - 1 + total) % total), [total]);
 
-  /* ===== AUTO SLIDE ===== */
   useEffect(() => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [next]);
 
   /* ===== TOUCH ===== */
   const onTouchStart = (e: React.TouchEvent) => {
@@ -120,7 +134,7 @@ export default function Feedback() {
       <div className="max-w-7xl mx-auto px-6 space-y-24">
 
         {/* TITLE */}
-        <h2 className="text-center text-4xl md:text-6xl font-bold tracking-wider">
+        <h2 className="text-center text-3xl sm:text-4xl md:text-6xl font-bold tracking-wider">
           <span className="text-gold-gradient">CLIENT’S FEEDBACK</span>
         </h2>
 
@@ -148,10 +162,9 @@ export default function Feedback() {
                 key={idx}
                 onClick={() => setCurrent(idx)}
                 className={`w-2.5 h-2.5 rounded-full transition
-                  ${
-                    idx === current
-                      ? "bg-white"
-                      : "bg-white/30 hover:bg-white/60"
+                  ${idx === current
+                    ? "bg-white"
+                    : "bg-white/30 hover:bg-white/60"
                   }`}
               />
             ))}
@@ -159,14 +172,20 @@ export default function Feedback() {
         </div>
 
         {/* ================= DESKTOP ================= */}
+
         <div className="hidden md:block">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-20 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 py-16 xl:grid-cols-3 gap-10 lg:gap-16 mb-24 pt-5">
             {topRow.map((item, idx) => (
               <FeedbackCard key={idx} item={item} />
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
+          {/* TITLE */}
+          <h2 className="text-center text-4xl md:text-6xl py-8 font-bold tracking-wider">
+            <span className="text-gold-gradient">CLIENT’S FEEDBACK</span>
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12">
             {bottomRow.map((item, idx) => (
               <FeedbackCard key={idx} item={item} />
             ))}

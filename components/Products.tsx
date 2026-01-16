@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import { FaPlay, FaTimes } from "react-icons/fa";
 
 /* ================= PRODUCTS ================= */
 
@@ -52,7 +53,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
-    title: "TÀU BLUE DRAGON 01 – CẢNG HẢI LINH",
+    title: "TÀU BLUE DRAGON 01 - CẢNG HẢI LÍNH",
     images: [
       "/imgs/products/blue-dragon/1.jpg",
       "/imgs/products/blue-dragon/2.jpg",
@@ -102,80 +103,19 @@ function ProductCard({ item }: { item: Product }) {
   );
 }
 
+
 /* ================= PAGE ================= */
 
 export default function Products() {
-  const [current, setCurrent] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const startX = useRef(0);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
-  const total = PRODUCTS.length;
-
-  const next = () => setCurrent((i) => (i + 1) % total);
-  const prev = () => setCurrent((i) => (i - 1 + total) % total);
-
-  /* ===== AUTO SLIDE ===== */
-  useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, []);
-
-  /* ===== TOUCH HANDLERS ===== */
-  const onTouchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-  };
-
-  const onTouchEnd = (e: React.TouchEvent) => {
-    const delta = e.changedTouches[0].clientX - startX.current;
-    if (delta > 50) prev();
-    if (delta < -50) next();
-  };
+  const openVideo = (videoId: string) => {
+    setActiveVideo(videoId);
+  }
 
   return (
     <section id="products" className="text-white py-32">
       <div className="max-w-7xl mx-auto px-6 space-y-32">
-
-        {/* TITLE */}
-        <h2 className="text-center text-4xl md:text-6xl font-bold tracking-wider">
-          <span className="text-gold-gradient">OUR PRODUCTS</span>
-        </h2>
-
-        {/* ================= MOBILE SLIDER ================= */}
-        <div className="block md:hidden space-y-10">
-          <div
-            ref={sliderRef}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-            className="overflow-hidden"
-          >
-            <div
-              className="flex transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${current * 100}%)` }}
-            >
-              {PRODUCTS.map((item, idx) => (
-                <div key={idx} className="min-w-full">
-                  <ProductCard item={item} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* DOTS */}
-          <div className="flex justify-center gap-3">
-            {PRODUCTS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrent(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition
-                  ${
-                    idx === current
-                      ? "bg-white"
-                      : "bg-white/30 hover:bg-white/60"
-                  }`}
-              />
-            ))}
-          </div>
-        </div>
 
         {/* ================= DESKTOP GRID ================= */}
         <div className="hidden md:grid grid-cols-2 xl:grid-cols-3 gap-20">
@@ -184,6 +124,135 @@ export default function Products() {
           ))}
         </div>
 
+
+        {/* FEATURED VIDEOS SECTION */}
+        <div className="space-y-16">
+          <h2 className="text-center text-4xl md:text-5xl font-bold tracking-wider">
+            <span className="text-gold-gradient">OUR PRODUCTS</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+            {/* VIDEO 1 */}
+            <div className="space-y-4">
+              <div
+                onClick={() => openVideo("ELdGI7vYrZg")}
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
+              >
+                <Image
+                  src="https://img.youtube.com/vi/ELdGI7vYrZg/maxresdefault.jpg"
+                  alt="Video 1"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white mt-3 group-hover:scale-110 transition-transform">
+                    <FaPlay className="ml-1 text-xl" />
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-sm md:text-xl  uppercase tracking-wider text-white">
+                CHƯƠNG TRÌNH 20/11 - <br /> NGƯỜI THẦY CHÂN CHÍNH 2025
+              </p>
+            </div>
+
+            {/* VIDEO 2 */}
+            <div className="space-y-4">
+              <div
+                onClick={() => openVideo("KRgqpJDbRgY")}
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
+              >
+                <Image
+                  src="https://img.youtube.com/vi/KRgqpJDbRgY/maxresdefault.jpg"
+                  alt="Video 2"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white mt-3 group-hover:scale-110 transition-transform">
+                    <FaPlay className="ml-1 text-xl" />
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-sm md:text-xl  uppercase tracking-wider text-white">
+                ĐÊM NHẠC CHẤP TAY HOA
+              </p>
+            </div>
+
+            {/* VIDEO 3 */}
+            <div className="space-y-4">
+              <div
+                onClick={() => openVideo("ktpfCVIsbkk")}
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
+              >
+                <Image
+                  src="https://img.youtube.com/vi/ktpfCVIsbkk/maxresdefault.jpg"
+                  alt="Video 3"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white mt-3 group-hover:scale-110 transition-transform">
+                    <FaPlay className="ml-1 text-xl" />
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-sm md:text-xl  uppercase tracking-wider text-white">
+                TÀU BLUE DRAGON 1 <br /> CẢNG HẢI LINH - LNG CÁI MÉP
+              </p>
+            </div>
+
+            {/* VIDEO 4 */}
+            <div className="space-y-4">
+              <div
+                onClick={() => openVideo("MjXi8684Bbo")}
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
+              >
+                <Image
+                  src="https://img.youtube.com/vi/MjXi8684Bbo/maxresdefault.jpg"
+                  alt="Video 4"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 transition-all">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-black/50 text-white mt-3 group-hover:scale-110 transition-transform">
+                    <FaPlay className="ml-1 text-xl" />
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-sm md:text-xl  uppercase tracking-wider text-white">
+                CÔNG TY TNHH YOUNG IL VIỆT NAM
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ================= VIDEO MODAL ================= */}
+        {activeVideo && (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-all"
+            onClick={() => setActiveVideo(null)}
+          >
+            <div
+              className="relative w-full max-w-5xl aspect-video rounded-3xl overflow-hidden bg-black shadow-2xl animate-in zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="absolute top-6 right-6 z-10 p-3 rounded-full bg-black/50 text-white hover:bg-white hover:text-black transition-all"
+              >
+                <FaTimes size={20} />
+              </button>
+
+              <iframe
+                src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+                className="w-full h-full"
+                title="Video Player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

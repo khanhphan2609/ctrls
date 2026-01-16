@@ -1,8 +1,34 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  overflow-x: clip !important;
+  max-width: 100% !important;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+section {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip !important;
+  position: relative;
+}
+
 @font-face {
   font-family: "UTM Avo";
-  src:url("/fonts/utm-avo.woff") format("woff");
+  src: url("/fonts/utm-avo-webfont/utm-avo.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,7 +36,7 @@
 
 @font-face {
   font-family: "UTM Avo";
-  src: url("/fonts/utm-avobold.woff") format("woff");
+  src: url("/fonts/utm-avo-webfont/utm-avobold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -22,8 +48,9 @@
   --primary: #b77f0f;
   --white: #ecebdc;
   --black: #5d4109;
-  --font-geist-sans: "UTM Avo", -apple-system, BlinkMacSystemFont,
-  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --gold: #d6b26f;
+  --font-UTM_AVO: "UTM Avo", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-geist-mono: "Geist Mono", SFMono-Regular, Consolas, "Liberation Mono",
     Menlo, Courier, monospace;
 }
@@ -31,8 +58,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-UTM_AVO: var(--font-UTM_AVO);
+  --font-geist-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,6 +67,12 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -52,17 +85,17 @@ body {
   background-image: url("/imgs/bg.jpg");
   background-position: top center;
   background-repeat: repeat-y;
-  background-size: 100% auto;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 /* Gradient gold text */
 .text-gold-gradient {
-  background: linear-gradient(
-    -90deg,
-    var(--primary),
-    var(--white),
-    var(--primary)
-  );
+  background: linear-gradient(-90deg,
+      var(--primary),
+      var(--white),
+      var(--primary));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -75,6 +108,53 @@ body {
     0 0 12px rgba(0, 0, 0, 0.5);
 }
 
-section#about, section#services {
-    margin-top: 80px;
+section#about,
+section#services {
+  margin-top: 80px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Marquee infinite scroll animation */
+@keyframes marquee-about {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-about {
+  animation: marquee-about 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-about:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pop-up {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-pop-up {
+  animation: pop-up 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
