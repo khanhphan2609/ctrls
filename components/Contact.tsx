@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import {
   FaFacebookF,
   FaYoutube,
@@ -11,6 +12,14 @@ import {
 } from "react-icons/fa";
 
 export default function Contact() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) return <section id="contact" className="min-h-screen" />;
+
   return (
     <section id="contact" className="py-32 text-white">
       <div className="max-w-7xl mx-auto px-6">
@@ -204,7 +213,7 @@ export default function Contact() {
 
           {/* INFO BLOCKS */}
           <div className="grid grid-cols-1 gap-14 w-full">
-    
+
             {/* PORTFOLIO */}
             <div className="space-y-6 flex flex-col items-center">
               <h3 className="text-2xl font-bold tracking-widest text-gold-gradient uppercase">

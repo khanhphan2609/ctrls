@@ -66,7 +66,9 @@ const PRODUCTS: Product[] = [
 
 function ProductCard({ item }: { item: Product }) {
   return (
+
     <div className="space-y-8 px-2">
+
       <h3 className="text-center text-sm uppercase tracking-wide opacity-90">
         {item.title}
       </h3>
@@ -117,17 +119,51 @@ export default function Products() {
     <section id="products" className="text-white py-32">
       <div className="max-w-7xl mx-auto px-6 space-y-32">
 
+        <h2 className="hidden md:block text-center text-4xl md:text-5xl font-bold tracking-wider">
+          <span className="text-gold-gradient">OUR PRODUCTS</span>
+        </h2>
+
         {/* ================= DESKTOP GRID ================= */}
         <div className="hidden md:grid grid-cols-2 xl:grid-cols-3 gap-20">
+
           {PRODUCTS.map((item, idx) => (
             <ProductCard key={idx} item={item} />
           ))}
         </div>
 
+        {/* ================= MOBILE PRODUCT TABLE (ADDED PER REQUEST) ================= */}
+        <div className="md:hidden space-y-12 pt-10 border-t border-white/10">
+          <h2 className="text-center text-4xl md:text-4xl font-bold tracking-wider">
+            <span className="text-gold-gradient">OUR PRODUCTS</span>
+          </h2>
+          <div className="grid grid-cols-2 gap-4">
+            {PRODUCTS.map((item, idx) => (
+              <div key={idx} className="space-y-3">
+                <h3 className="text-center text-[10px] sm:text-xs uppercase font-bold tracking-tight opacity-90 min-h-[2rem] flex items-center justify-center">
+                  {item.title}
+                </h3>
+                <div className="flex gap-1.5">
+                  <div className="flex-1 flex flex-col gap-1.5">
+                    {item.images.slice(0, 2).map((img, i) => (
+                      <div key={i} className="relative aspect-square rounded-lg overflow-hidden">
+                        <Image src={img} alt="" fill className="object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex-1">
+                    <div className="relative h-full w-full rounded-lg overflow-hidden">
+                      <Image src={item.images[2]} alt="" fill className="object-cover" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* FEATURED VIDEOS SECTION */}
         <div className="space-y-16">
-          <h2 className="text-center text-4xl md:text-5xl font-bold tracking-wider">
+          <h2 className="text-center text-4xl md:text-4xl font-bold tracking-wider">
             <span className="text-gold-gradient">OUR PRODUCTS</span>
           </h2>
 
@@ -225,6 +261,8 @@ export default function Products() {
             </div>
           </div>
         </div>
+
+
 
         {/* ================= VIDEO MODAL ================= */}
         {activeVideo && (

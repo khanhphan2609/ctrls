@@ -13,13 +13,13 @@ const socialLinks = [
     {
         name: "Youtube",
         icon: <FaYoutube size={20} />,
-        url: "https://www.youtube.com/@ctrlscoltd",
+        url: "https://www.youtube.com/@ctrlsprofile",
         color: "bg-[#FF0000]",
     },
     {
         name: "Tiktok",
         icon: <FaTiktok size={20} />,
-        url: "https://www.tiktok.com/@ctrlscoltd",
+        url: "https://www.tiktok.com/@ctrls_coltd",
         color: "bg-black",
     },
     {

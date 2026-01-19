@@ -11,8 +11,8 @@ import {
 /* ===== NAV CONFIG ===== */
 const NAV_ITEMS = [
   { id: "about", label: "About us" },
-  { id: "portfolio", label: "Profile" },
   { id: "services", label: "Services" },
+  { id: "portfolio", label: "Profile" },
   { id: "clients", label: "Case Study" },
   { id: "contact", label: "Contact" },
 ];

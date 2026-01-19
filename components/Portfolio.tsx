@@ -1,7 +1,18 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaExclamationCircle, FaFacebookF, FaYoutube, FaTiktok } from "react-icons/fa";
 
 export default function Portfolio() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) return <section id="portfolio" className="min-h-screen" />;
+
   return (
     <section
       id="portfolio"

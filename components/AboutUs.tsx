@@ -77,7 +77,7 @@ export default function AboutUs() {
           >
             CTRL-S is dedicated to delivering paramount services to our clients through{" "}
             <span className="font-bold">memorable events</span>,{" "}
-            <span className="font-bold">striking visuals</span>, and{" "}
+            <span className="font-bold">striking visuals</span>,{" "}
             <span className="font-bold">compelling films</span>. We operate under the core
             philosophy of being{" "}
             <span className="font-bold">“Saving the true value of yours”</span>.
