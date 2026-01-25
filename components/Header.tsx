@@ -12,8 +12,8 @@ import {
 const NAV_ITEMS = [
   { id: "about", label: "About us" },
   { id: "services", label: "Services" },
+  { id: "products", label: "Products" },
   { id: "portfolio", label: "Profile" },
-  { id: "clients", label: "Case Study" },
   { id: "contact", label: "Contact" },
 ];
 
