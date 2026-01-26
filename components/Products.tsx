@@ -194,11 +194,11 @@ export default function Products() {
             {/* VIDEO 2 */}
             <div className="space-y-4">
               <div
-                onClick={() => openVideo("KRgqpJDbRgY")}
+                onClick={() => openVideo("MjXi8684Bbo")}
                 className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
               >
                 <Image
-                  src="https://img.youtube.com/vi/KRgqpJDbRgY/maxresdefault.jpg"
+                  src="https://img.youtube.com/vi/MjXi8684Bbo/maxresdefault.jpg"
                   alt="Video 2"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
@@ -217,11 +217,11 @@ export default function Products() {
             {/* VIDEO 3 */}
             <div className="space-y-4">
               <div
-                onClick={() => openVideo("ktpfCVIsbkk")}
+                onClick={() => openVideo("KRgqpJDbRgY")}
                 className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
               >
                 <Image
-                  src="https://img.youtube.com/vi/ktpfCVIsbkk/maxresdefault.jpg"
+                  src="https://img.youtube.com/vi/KRgqpJDbRgY/maxresdefault.jpg"
                   alt="Video 3"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
@@ -240,11 +240,11 @@ export default function Products() {
             {/* VIDEO 4 */}
             <div className="space-y-4">
               <div
-                onClick={() => openVideo("MjXi8684Bbo")}
+                onClick={() => openVideo("ktpfCVIsbkk")}
                 className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-[var(--primary)] transition-all duration-500"
               >
                 <Image
-                  src="https://img.youtube.com/vi/MjXi8684Bbo/maxresdefault.jpg"
+                  src="https://img.youtube.com/vi/ktpfCVIsbkk/maxresdefault.jpg"
                   alt="Video 4"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-100"
