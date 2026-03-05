@@ -62,6 +62,13 @@ const FEEDBACKS: FeedbackItem[] = [
     content:
       "Kịch bản sáng tạo, ekip kiểm soát timeline tốt và xử lý tình huống phát sinh rất nhanh.",
   },
+  {
+    name: "CHỊ PHAN HỒNG MAI PHƯƠNG",
+    title: "HR và Admin Excutive, Công ty TNHH TiTan Technology",
+    avatar: "/imgs/feedback/phan-hong-mai-phuong.png",
+    content:
+      "Đánh giá cao tinh thần làm việc chuyên nghiệp và sự đồng hành sát sao của team ngay từ những ngày đầu triển khai. Đội ngũ đã luôn chủ động hỗ trợ, phối hợp nhịp nhàng và xử lý công việc một cách tận tâm, góp phần quan trọng giúp chương trình được vận hành suôn sẻ. Đại diện từ phía Titan Technology xin gửi lời cảm ơn chân thành đến toàn bộ ekip vì sự trách nhiệm và nỗ lực xuyên suốt dự án.",
+  },
 ];
 
 /* ================= CARD ================= */
@@ -91,7 +98,7 @@ function FeedbackCard({ item }: { item: FeedbackItem }) {
 
       {/* Footer area for Name and Title */}
       <div className="shrink-0 pt-2 border-t border-white/10">
-        <p className="font-semibold tracking-wide text-lg ">{item.name}</p>
+        <p className="font-semibold tracking-wide text-base ">{item.name}</p>
         <p className="text-sm md:text-base opacity-100 mt-1 min-h-[3rem] flex items-start justify-center">
           {item.title}
         </p>
@@ -132,7 +139,6 @@ export default function Feedback() {
   return (
     <section id="feedback" className="py-32 text-white">
       <div className="max-w-7xl mx-auto px-6 space-y-24">
-
         {/* TITLE */}
         <h2 className="text-center text-3xl sm:text-4xl md:text-6xl font-bold tracking-wider">
           <span className="text-gold-gradient">CLIENT’S FEEDBACK</span>
@@ -162,9 +168,10 @@ export default function Feedback() {
                 key={idx}
                 onClick={() => setCurrent(idx)}
                 className={`w-2.5 h-2.5 rounded-full transition
-                  ${idx === current
-                    ? "bg-white"
-                    : "bg-white/30 hover:bg-white/60"
+                  ${
+                    idx === current
+                      ? "bg-white"
+                      : "bg-white/30 hover:bg-white/60"
                   }`}
               />
             ))}
@@ -174,7 +181,7 @@ export default function Feedback() {
         {/* ================= DESKTOP ================= */}
 
         <div className="hidden md:block">
-          <div className="grid grid-cols-1 sm:grid-cols-2 py-16 xl:grid-cols-3 gap-10 lg:gap-16 mb-24 pt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 py-16 xl:grid-cols-3  gap-10 lg:gap-16 mb-24 pt-6">
             {topRow.map((item, idx) => (
               <FeedbackCard key={idx} item={item} />
             ))}
@@ -187,11 +194,19 @@ export default function Feedback() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 lg:gap-12">
             {bottomRow.map((item, idx) => (
-              <FeedbackCard key={idx} item={item} />
+              <div
+                key={idx}
+                className={
+                  idx === bottomRow.length - 1
+                    ? "xl:col-span-2 xl:col-start-2"
+                    : ""
+                }
+              >
+                <FeedbackCard item={item} />
+              </div>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
