@@ -53,7 +53,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
-    title: "TÀU BLUE DRAGON 01 - CẢNG HẢI LÍNH",
+    title: "TÀU BLUE DRAGON 01 - CẢNG HẢI LINH",
     images: [
       "/imgs/products/blue-dragon/1.jpg",
       "/imgs/products/blue-dragon/2.jpg",
@@ -210,7 +210,7 @@ export default function Products() {
                 </div>
               </div>
               <p className="text-center text-sm md:text-xl  uppercase tracking-wider text-white">
-                ĐÊM NHẠC CHẤP TAY HOA
+                ĐÊM NHẠC CHẮP TAY HOA
               </p>
             </div>
 
